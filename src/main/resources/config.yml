@@ -1,0 +1,137 @@
+convertable:
+  - NETHERITE_SWORD
+  - DIAMOND_SWORD
+  - GOLDEN_SWORD
+  - IRON_SWORD
+  - STONE_SWORD
+  - WOODEN_SWORD
+  - NETHERITE_AXE
+  - DIAMOND_AXE
+  - GOLDEN_AXE
+  - IRON_AXE
+  - STONE_AXE
+  - WOODEN_AXE
+  - CROSSBOW
+  - BOW
+  - NETHERITE_HELMET
+  - NETHERITE_CHESTPLATE
+  - NETHERITE_LEGGINGS
+  - NETHERITE_BOOTS
+  - DIAMOND_HELMET
+  - DIAMOND_CHESTPLATE
+  - DIAMOND_LEGGINGS
+  - DIAMOND_BOOTS
+  - GOLDEN_HELMET
+  - GOLDEN_CHESTPLATE
+  - GOLDEN_LEGGINGS
+  - GOLDEN_BOOTS
+  - IRON_HELMET
+  - IRON_CHESTPLATE
+  - IRON_LEGGINGS
+  - IRON_BOOTS
+  - CHAINMAIL_HELMET
+  - CHAINMAIL_CHESTPLATE
+  - CHAINMAIL_LEGGINGS
+  - CHAINMAIL_BOOTS
+  - LEATHER_HELMET
+  - LEATHER_CHESTPLATE
+  - LEATHER_LEGGINGS
+  - LEATHER_BOOTS
+
+names-list-melee:
+  - great
+  - sharp
+  - heavy
+  - void
+  - samurai
+  - executioner
+  - dark
+  - light
+  - fiery
+  - blazing
+  - end
+  - atomsplit
+  - nano
+  - primordial
+  - skyward
+  - summit
+  - mist
+  - royal
+  - black
+  - draconic
+  - sacrificial
+  - aqualiar
+  - grass
+  - mizuki
+  - tsurugi
+
+sword-names:
+  - sword
+  - katana
+  - claymore
+  - dao
+  - falchion
+  - splitter
+  - greatsword
+  - sabre
+  - blade
+  - dagger
+  - edge
+  - razor
+  - peacemaker
+
+axe-names:
+  - edge
+  - axe
+  - reaver
+  - cleaver
+
+names-list-range:
+  - redwood
+  - dark
+  - great
+  - long
+  - piercing
+  - hawkeye's
+  - war
+  - heavy
+  - extinction
+  - precision
+  - killer's
+  - deserted
+  - royal
+  - skyward
+  - nano
+  - end
+  - blazing
+  - void
+  - samurai
+  - light
+  - draconic
+
+names-list-armor:
+  - noble
+  - crimson
+  - instructor
+  - wanderer
+  - pale flame
+  - blizzard strayer
+  - star
+  - void
+  - echoing
+  - bloodstained
+  - archaic
+  - thundering
+  - furious
+  - samurai
+  - end
+  - light
+  - dark
+  - heavy
+  - heavenly
+  - fiery
+  - blazing
+  - galactic
+  - primordial
+  - skyward
+  - royal

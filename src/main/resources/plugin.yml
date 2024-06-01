@@ -1,0 +1,4 @@
+name: MagicItems
+version: '${project.version}'
+main: net.pullolo.magicitems.MagicItems
+api-version: '1.20'
