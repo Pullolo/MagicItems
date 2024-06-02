@@ -155,7 +155,7 @@ public class ItemConverter {
                 if(item.getType().toString().toLowerCase().contains("sword")){
                     name += melees.get(r.nextInt(melees.size())) + " " + swords.get(r.nextInt(swords.size()));
                 } else if (item.getType().toString().toLowerCase().contains("_axe")){
-                    name = melees.get(r.nextInt(melees.size())) + " " + axes.get(r.nextInt(axes.size()));
+                    name += melees.get(r.nextInt(melees.size())) + " " + axes.get(r.nextInt(axes.size()));
                 } else {
                     try {
                         name += melees.get(r.nextInt(melees.size())) + " " + item.getType().toString().toLowerCase().split("_")[1];
