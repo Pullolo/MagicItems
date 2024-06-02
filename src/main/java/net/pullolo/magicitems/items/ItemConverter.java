@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.pullolo.magicitems.scrolls.Scroll;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import static net.pullolo.magicitems.MagicItems.logInfo;
-import static net.pullolo.magicitems.MagicItems.logWarning;
+import static net.pullolo.magicitems.MagicItems.*;
 import static net.pullolo.magicitems.ModifiableItems.isArmor;
 import static net.pullolo.magicitems.ModifiableItems.isRange;
 import static net.pullolo.magicitems.utils.Utils.prettify;
@@ -29,6 +29,8 @@ public class ItemConverter {
     private final FileConfiguration config;
     private final NamespacedKey statKey;
     private final NamespacedKey qualityKey;
+    private final NamespacedKey generalKey;
+    private final NamespacedKey scrollKey;
     private List<String> melees;
     private List<String> range;
     private List<String> armor;
@@ -39,6 +41,8 @@ public class ItemConverter {
         this.config = config;
         statKey = new NamespacedKey(plugin, "magic-items-stat");
         qualityKey = new NamespacedKey(plugin, "magic-items-quality");
+        generalKey = new NamespacedKey(plugin, "magic-items");
+        scrollKey = new NamespacedKey(plugin, "magic-items-scrolls");
         loadNames();
     }
 
@@ -49,11 +53,12 @@ public class ItemConverter {
         }
         double quality = new Random().nextDouble()*100;
         boolean mythical = new Random().nextInt(10)==0;
+        boolean scroll = new Random().nextInt(100)<5;
         setName(item, quality, mythical);
-        setStats(item, player, quality, mythical);
+        setStats(item, player, quality, mythical, scroll);
     }
 
-    private void setStats(ItemStack item, String player, double quality, boolean mythical) {
+    private void setStats(ItemStack item, String player, double quality, boolean mythical, boolean scroll) {
         ItemMeta meta = item.getItemMeta();
         Random r = new Random();
         double value = mythical ? r.nextDouble()*10+10 : r.nextDouble()*10;
@@ -83,6 +88,20 @@ public class ItemConverter {
             );
         }
         lore.add(Component.text(""));
+
+        if (!isArmor(item) && !isRange(item) && scroll){
+            Scroll s = Scroll.getScroll(Scroll.getAllScrolls().get(r.nextInt(Scroll.getAllScrolls().size())));
+            meta.getPersistentDataContainer().set(scrollKey, PersistentDataType.STRING, s.getType());
+            lore.add(Component.text("Ancient Scroll: " + s.getName()).color(TextColor.fromHexString("#FFAA00")).decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(" RIGHT CLICK").color(TextColor.fromHexString("#FFFF55")).decoration(TextDecoration.BOLD, true).decoration(TextDecoration.ITALIC, false)));
+            for (String str: s.getDescription()){
+                lore.add(Component.text(str).color(TextColor.fromHexString("#AAAAAA")).decoration(TextDecoration.ITALIC, false));
+            }
+            lore.add(Component.text("Cooldown: ").color(TextColor.fromHexString("#555555")).decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(s.getCooldown()+"s").color(TextColor.fromHexString("#55FF55")).decoration(TextDecoration.ITALIC, false)));
+            lore.add(Component.text(""));
+        }
+
         lore.add(
                 Component.text("Obtained by ").color(TextColor.fromHexString("#606060")).decoration(TextDecoration.ITALIC, false).append(
                         Component.text((player)).color(TextColor.fromHexString("#00ff5c")).decoration(TextDecoration.ITALIC, false)
@@ -203,5 +222,13 @@ public class ItemConverter {
 
     public NamespacedKey getStatKey(){
         return statKey;
+    }
+
+    public NamespacedKey getGeneralKey() {
+        return generalKey;
+    }
+
+    public NamespacedKey getScrollKey() {
+        return scrollKey;
     }
 }

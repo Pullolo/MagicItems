@@ -1,7 +1,13 @@
 package net.pullolo.magicitems;
 
+import net.pullolo.magicitems.commands.Roll;
 import net.pullolo.magicitems.events.ItemsEventHandler;
 import net.pullolo.magicitems.items.ItemConverter;
+import net.pullolo.magicitems.scrolls.FireScroll;
+import net.pullolo.magicitems.scrolls.Scroll;
+import net.pullolo.magicitems.utils.CooldownApi;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,7 +27,11 @@ public final class MagicItems extends JavaPlugin {
         saveDefaultConfig();
         config = getConfig();
         init();
-        getServer().getPluginManager().registerEvents(new ItemsEventHandler(new ItemConverter(config, this)), this);
+        ItemConverter converter = new ItemConverter(config, this);
+        Scroll.init();
+        getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
+        registerCommand(new Roll(converter), "roll");
+        createCooldowns();
         logInfo("Hello from magic items!");
     }
 
@@ -36,6 +46,19 @@ public final class MagicItems extends JavaPlugin {
             new ModifiableItems(config.getStringList("convertable"));
         } catch (Exception e){
             logWarning(e.getMessage());
+        }
+    }
+
+    private void createCooldowns(){
+        CooldownApi.createCooldown("fire-scroll", new FireScroll().getCooldown());
+    }
+
+    private void registerCommand(CommandExecutor cmd, String cmdName){
+        if (cmd instanceof TabCompleter){
+            getCommand(cmdName).setExecutor(cmd);
+            getCommand(cmdName).setTabCompleter((TabCompleter) cmd);
+        } else {
+            throw new RuntimeException("Provided object is not a command executor and a tab completer at the same time!");
         }
     }
 

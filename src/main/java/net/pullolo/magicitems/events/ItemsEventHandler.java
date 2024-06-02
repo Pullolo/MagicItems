@@ -1,13 +1,16 @@
 package net.pullolo.magicitems.events;
 
 import net.pullolo.magicitems.items.ItemConverter;
+import net.pullolo.magicitems.scrolls.Scroll;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,7 +26,7 @@ import static net.pullolo.magicitems.ModifiableItems.canBeConverted;
 public class ItemsEventHandler implements Listener {
 
     private final ItemConverter converter;
-    private final NamespacedKey generalKey = new NamespacedKey(magicItems, "magic-items");
+
     private final List<EquipmentSlot> armorSlots = new ArrayList<>();
 
     public ItemsEventHandler(ItemConverter converter){
@@ -42,11 +45,11 @@ public class ItemsEventHandler implements Listener {
             if (!canBeConverted(item)){
                 continue;
             }
-            if (item.getItemMeta().getPersistentDataContainer().has(generalKey, PersistentDataType.STRING)){
+            if (item.getItemMeta().getPersistentDataContainer().has(converter.getGeneralKey(), PersistentDataType.STRING)){
                 continue;
             }
             ItemMeta meta = item.getItemMeta();
-            meta.getPersistentDataContainer().set(generalKey, PersistentDataType.STRING, "rolled");
+            meta.getPersistentDataContainer().set(converter.getGeneralKey(), PersistentDataType.STRING, "rolled");
             item.setItemMeta(meta);
             if (new Random().nextInt(4)==0) converter.convert(item, p.getName());
         }
@@ -59,11 +62,11 @@ public class ItemsEventHandler implements Listener {
         if (!canBeConverted(item)){
             return;
         }
-        if (item.getItemMeta().getPersistentDataContainer().has(generalKey, PersistentDataType.STRING)){
+        if (item.getItemMeta().getPersistentDataContainer().has(converter.getGeneralKey(), PersistentDataType.STRING)){
             return;
         }
         ItemMeta meta = item.getItemMeta();
-        meta.getPersistentDataContainer().set(generalKey, PersistentDataType.STRING, "rolled");
+        meta.getPersistentDataContainer().set(converter.getGeneralKey(), PersistentDataType.STRING, "rolled");
         item.setItemMeta(meta);
     }
 
@@ -76,11 +79,11 @@ public class ItemsEventHandler implements Listener {
             if (!canBeConverted(item)){
                 continue;
             }
-            if (item.getItemMeta().getPersistentDataContainer().has(generalKey, PersistentDataType.STRING)){
+            if (item.getItemMeta().getPersistentDataContainer().has(converter.getGeneralKey(), PersistentDataType.STRING)){
                 continue;
             }
             ItemMeta meta = item.getItemMeta();
-            meta.getPersistentDataContainer().set(generalKey, PersistentDataType.STRING, "rolled");
+            meta.getPersistentDataContainer().set(converter.getGeneralKey(), PersistentDataType.STRING, "rolled");
             item.setItemMeta(meta);
             try {
                 if (event.getDamageSource().getCausingEntity() instanceof Player){
@@ -99,7 +102,7 @@ public class ItemsEventHandler implements Listener {
         if (!item.hasItemMeta()){
             return;
         }
-        if (!item.getItemMeta().getPersistentDataContainer().has(generalKey)){
+        if (!item.getItemMeta().getPersistentDataContainer().has(converter.getGeneralKey())){
             return;
         }
         if (!item.getItemMeta().getPersistentDataContainer().has(converter.getStatKey())){
@@ -160,5 +163,22 @@ public class ItemsEventHandler implements Listener {
         }
         if (def<=0.0) return;
         event.setDamage(event.getFinalDamage()-(event.getFinalDamage()*(def/100)));
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event){
+        if (event.getItem()==null || event.getItem().getItemMeta()==null){
+            return;
+        }
+        if (!(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR))){
+            return;
+        }
+        ItemStack item = event.getItem();
+        if (!item.getItemMeta().getPersistentDataContainer().has(converter.getScrollKey())){
+            return;
+        }
+        Player p = event.getPlayer();
+        Scroll s = Scroll.getScroll(item.getItemMeta().getPersistentDataContainer().get(converter.getScrollKey(), PersistentDataType.STRING));
+        s.executeAbility(p);
     }
 }
