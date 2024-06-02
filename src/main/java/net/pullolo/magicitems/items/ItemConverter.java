@@ -186,7 +186,7 @@ public class ItemConverter {
                 logWarning(e.getMessage());
             }
         }
-        name += (scroll ? "✧": "");
+        name += (scroll ? " ✧": "");
         TextColor color = mythical ? TextColor.fromHexString("#d600ff") : TextColor.fromHexString("#55FFFF");
         meta.displayName(Component.text(prettify(name)).color(color).decoration(TextDecoration.ITALIC, false));
         item.setItemMeta(meta);
