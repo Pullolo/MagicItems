@@ -54,7 +54,7 @@ public class ItemConverter {
         double quality = new Random().nextDouble()*100;
         boolean mythical = new Random().nextInt(10)==0;
         boolean scroll = new Random().nextInt(100)<5;
-        setName(item, quality, mythical);
+        setName(item, quality, mythical, scroll);
         setStats(item, player, quality, mythical, scroll);
     }
 
@@ -153,7 +153,7 @@ public class ItemConverter {
         return "Highly Damaged ";
     }
 
-    private void setName(ItemStack item, double q, boolean mythical){
+    private void setName(ItemStack item, double q, boolean mythical, boolean scroll){
         Random r = new Random();
         ItemMeta meta = item.getItemMeta();
         String name = getQualityName(q) + (mythical ? "Mythical ": "");
@@ -186,6 +186,7 @@ public class ItemConverter {
                 logWarning(e.getMessage());
             }
         }
+        name += (scroll ? "✧": "");
         TextColor color = mythical ? TextColor.fromHexString("#d600ff") : TextColor.fromHexString("#55FFFF");
         meta.displayName(Component.text(prettify(name)).color(color).decoration(TextDecoration.ITALIC, false));
         item.setItemMeta(meta);

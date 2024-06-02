@@ -22,9 +22,9 @@ public class FireScroll extends Scroll{
         if (CooldownApi.isOnCooldown("fire-scroll", p)){
             return;
         }
-        p.getWorld().spawnParticle(Particle.FLAME, p.getLocation().clone().add(0, 1, 0), 100, 3, 0.5, 3, 0.01);
+        p.getWorld().spawnParticle(Particle.FLAME, p.getLocation().clone().add(0, 1, 0), 120, 3, 0.5, 3, 0.01);
         p.getWorld().playSound(p.getLocation(), Sound.ITEM_FIRECHARGE_USE, 1, 0.7f);
-        for (Entity e: p.getLocation().getNearbyEntities(3, 1, 3)){
+        for (Entity e: p.getLocation().getNearbyEntities(4, 2, 4)){
             if (e.equals(p)) continue;
             if (!(e instanceof LivingEntity)) continue;
             e.setFireTicks(65);

@@ -17,6 +17,10 @@ public abstract class Scroll {
         switch (type){
             case "fire":
                 return new FireScroll();
+            case "wind":
+                return new WindScroll();
+            case "lightning":
+                return new LightningScroll();
             default:
                 return new Scroll() {
                     @Override
@@ -29,6 +33,8 @@ public abstract class Scroll {
 
     public static void init(){
         scrolls.add("fire");
+        scrolls.add("wind");
+        scrolls.add("lightning");
     }
 
     public static ArrayList<String> getAllScrolls(){

@@ -4,7 +4,9 @@ import net.pullolo.magicitems.commands.Roll;
 import net.pullolo.magicitems.events.ItemsEventHandler;
 import net.pullolo.magicitems.items.ItemConverter;
 import net.pullolo.magicitems.scrolls.FireScroll;
+import net.pullolo.magicitems.scrolls.LightningScroll;
 import net.pullolo.magicitems.scrolls.Scroll;
+import net.pullolo.magicitems.scrolls.WindScroll;
 import net.pullolo.magicitems.utils.CooldownApi;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
@@ -51,6 +53,8 @@ public final class MagicItems extends JavaPlugin {
 
     private void createCooldowns(){
         CooldownApi.createCooldown("fire-scroll", new FireScroll().getCooldown());
+        CooldownApi.createCooldown("wind-scroll", new WindScroll().getCooldown());
+        CooldownApi.createCooldown("lightning-scroll", new LightningScroll().getCooldown());
     }
 
     private void registerCommand(CommandExecutor cmd, String cmdName){
