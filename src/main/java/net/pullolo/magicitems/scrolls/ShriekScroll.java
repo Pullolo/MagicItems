@@ -25,8 +25,8 @@ public class ShriekScroll extends Scroll {
     public ShriekScroll() {
         type = "shriek";
         name = "Shriek Missile";
-        description.add("Shoot a powerful shriek missile in the direction you");
-        description.add("are looking at.");
+        description.add("Shoot a powerful shriek missile in the");
+        description.add("direction you are looking at.");
         cooldown = 16;
     }
 
