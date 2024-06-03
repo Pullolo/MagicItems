@@ -53,7 +53,7 @@ public class ItemConverter {
         }
         double quality = new Random().nextDouble()*100;
         boolean mythical = new Random().nextInt(10)==0;
-        boolean scroll = new Random().nextInt(100)<5;
+        boolean scroll = new Random().nextInt(100)<7;
         setName(item, quality, mythical, scroll);
         setStats(item, player, quality, mythical, scroll);
     }
@@ -89,11 +89,17 @@ public class ItemConverter {
         }
         lore.add(Component.text(""));
 
-        if (!isArmor(item) && !isRange(item) && scroll){
-            Scroll s = Scroll.getScroll(Scroll.getAllScrolls().get(r.nextInt(Scroll.getAllScrolls().size())));
+        if (!isArmor(item) && scroll){
+            Scroll s;
+            if (isRange(item)){
+                s = Scroll.getScroll(Scroll.getAllRangeScrolls().get(r.nextInt(Scroll.getAllRangeScrolls().size())));
+            } else {
+                s = Scroll.getScroll(Scroll.getAllMeleeScrolls().get(r.nextInt(Scroll.getAllMeleeScrolls().size())));
+            }
+
             meta.getPersistentDataContainer().set(scrollKey, PersistentDataType.STRING, s.getType());
             lore.add(Component.text("Ancient Scroll: " + s.getName()).color(TextColor.fromHexString("#FFAA00")).decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text(" RIGHT CLICK").color(TextColor.fromHexString("#FFFF55")).decoration(TextDecoration.BOLD, true).decoration(TextDecoration.ITALIC, false)));
+                    .append(Component.text(isRange(item) ? " LEFT CLICK" : " RIGHT CLICK").color(TextColor.fromHexString("#FFFF55")).decoration(TextDecoration.BOLD, true).decoration(TextDecoration.ITALIC, false)));
             for (String str: s.getDescription()){
                 lore.add(Component.text(str).color(TextColor.fromHexString("#AAAAAA")).decoration(TextDecoration.ITALIC, false));
             }

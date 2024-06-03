@@ -22,6 +22,7 @@ import java.util.Random;
 
 import static net.pullolo.magicitems.MagicItems.*;
 import static net.pullolo.magicitems.ModifiableItems.canBeConverted;
+import static net.pullolo.magicitems.ModifiableItems.isRange;
 
 public class ItemsEventHandler implements Listener {
 
@@ -170,13 +171,21 @@ public class ItemsEventHandler implements Listener {
         if (event.getItem()==null || event.getItem().getItemMeta()==null){
             return;
         }
-        if (!(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR))){
-            return;
-        }
         ItemStack item = event.getItem();
         if (!item.getItemMeta().getPersistentDataContainer().has(converter.getScrollKey())){
             return;
         }
+
+        if (isRange(item)){
+            if (!(event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK))){
+                return;
+            }
+        } else {
+            if (!(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR))){
+                return;
+            }
+        }
+
         Player p = event.getPlayer();
         Scroll s = Scroll.getScroll(item.getItemMeta().getPersistentDataContainer().get(converter.getScrollKey(), PersistentDataType.STRING));
         s.executeAbility(p);

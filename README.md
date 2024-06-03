@@ -11,12 +11,14 @@ This plugin adds a variety of amazing items, through just the Spigot Api.
   - *Bows*
   - *Crossbows*
 
-All special items have a 5% chance to contain an ancient scroll which gives the item special ability.
+All special items have a 7% chance to contain an ancient scroll which gives the item special ability.
 
 ## Current list of Scrolls
-  - Wind Boost ⭐
+  - Cloud Boost ⭐
   - Fire Ring 🔥
   - Lightning Strike ⚡
+  - Shriek Missile (Range Only) 🏹
+  - Instant Heal ❤️
 
 > [!IMPORTANT]
 > Special items can be obtained only from random chests or mob drops

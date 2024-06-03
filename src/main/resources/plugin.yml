@@ -4,6 +4,6 @@ main: net.pullolo.magicitems.MagicItems
 api-version: '1.20'
 commands:
   roll:
-    usage: /<command>
+    usage: /<command> <?scroll>
     description: Allows you to re-roll special items!
     permission: mi-roll

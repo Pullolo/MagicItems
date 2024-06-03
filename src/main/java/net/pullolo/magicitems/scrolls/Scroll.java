@@ -1,15 +1,19 @@
 package net.pullolo.magicitems.scrolls;
 
 import org.bukkit.entity.Player;
+import org.joml.AxisAngle4f;
 
 import java.util.ArrayList;
 
 public abstract class Scroll {
-    private static final ArrayList<String> scrolls = new ArrayList<>();
+    private static final ArrayList<String> meleeScrolls = new ArrayList<>();
+    private static final ArrayList<String> rangeScrolls = new ArrayList<>();
     protected String name;
     protected String type;
     protected ArrayList<String> description = new ArrayList<>();
     protected int cooldown;
+
+
 
     public abstract void executeAbility(Player p);
 
@@ -21,6 +25,10 @@ public abstract class Scroll {
                 return new WindScroll();
             case "lightning":
                 return new LightningScroll();
+            case "growth":
+                return new GrowthScroll();
+            case "shriek":
+                return new ShriekScroll();
             default:
                 return new Scroll() {
                     @Override
@@ -32,13 +40,20 @@ public abstract class Scroll {
     }
 
     public static void init(){
-        scrolls.add("fire");
-        scrolls.add("wind");
-        scrolls.add("lightning");
+        meleeScrolls.add("fire");
+        meleeScrolls.add("wind");
+        meleeScrolls.add("lightning");
+        meleeScrolls.add("growth");
+
+        rangeScrolls.add("shriek");
     }
 
-    public static ArrayList<String> getAllScrolls(){
-        return scrolls;
+    public static ArrayList<String> getAllMeleeScrolls(){
+        return meleeScrolls;
+    }
+
+    public static ArrayList<String> getAllRangeScrolls() {
+        return rangeScrolls;
     }
 
     public String getName() {

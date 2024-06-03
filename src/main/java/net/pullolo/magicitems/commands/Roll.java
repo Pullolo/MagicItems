@@ -40,13 +40,29 @@ public class Roll extends Command implements CommandExecutor, TabCompleter {
             p.sendMessage(ChatColor.RED + "Invalid item!");
             return true;
         }
+
+        if (args.length==0){
+            convert(item, p, true);
+            return true;
+        }
+        if (args.length==1 && args[0].equalsIgnoreCase("scroll")){
+            do {
+                convert(item, p, false);
+            } while ((!item.getItemMeta().getPersistentDataContainer().has(converter.getScrollKey())));
+            p.sendMessage(ChatColor.GREEN + "Item re-converted!");
+            return true;
+        }
+        return true;
+    }
+
+    private void convert(ItemStack item, Player p, boolean display){
         ItemMeta meta = item.getItemMeta();
         if (!item.getItemMeta().getPersistentDataContainer().has(converter.getGeneralKey())){
             meta.getPersistentDataContainer().set(converter.getGeneralKey(), PersistentDataType.STRING, "rolled");
             item.setItemMeta(meta);
             converter.convert(item, p.getName());
             p.sendMessage(ChatColor.GREEN + "Item converted!");
-            return true;
+            return;
         }
         if (item.getItemMeta().getPersistentDataContainer().has(converter.getStatKey())){
             meta.getPersistentDataContainer().remove(converter.getStatKey());
@@ -56,12 +72,22 @@ public class Roll extends Command implements CommandExecutor, TabCompleter {
         }
         item.setItemMeta(meta);
         converter.convert(item, p.getName());
-        p.sendMessage(ChatColor.GREEN + "Item re-converted!");
-        return true;
+        if(display) p.sendMessage(ChatColor.GREEN + "Item re-converted!");
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
+        if (!cmd.getName().equalsIgnoreCase("roll")){
+            return null;
+        }
+        if (!(sender instanceof Player)){
+            return null;
+        }
+        if (args.length==1){
+            ArrayList<String> completion = new ArrayList<>();
+            addToCompletion("scroll", args[0], completion);
+            return completion;
+        }
         return new ArrayList<>();
     }
 }
