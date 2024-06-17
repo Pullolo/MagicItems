@@ -37,6 +37,7 @@ convertable:
   - LEATHER_CHESTPLATE
   - LEATHER_LEGGINGS
   - LEATHER_BOOTS
+  - MACE
 
 names-list-melee:
   - great

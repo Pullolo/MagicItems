@@ -1,7 +1,7 @@
 name: MagicItems
 version: '${project.version}'
 main: net.pullolo.magicitems.MagicItems
-api-version: '1.20'
+api-version: '1.21'
 commands:
   roll:
     usage: /<command> <?scroll>
