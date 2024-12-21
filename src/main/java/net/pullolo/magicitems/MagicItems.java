@@ -21,22 +21,28 @@ public final class MagicItems extends JavaPlugin {
     public static ParticleApi particleApi;
 
 
-    @Override
-    public void onEnable() {
-        // Plugin startup logic
-        magicItems = this;
-        saveDefaultConfig();
-        config = getConfig();
-        particleApi = new ParticleApi(this);
-        init();
-        ItemConverter converter = new ItemConverter(config, this);
-        Scroll.init();
-        getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
-        registerCommand(new Roll(converter, 20), "roll");
-        createCooldowns();
-        logInfo("Hello from magic items!");
+   @Override
+public void onEnable() {
+    // Plugin startup logic
+    magicItems = this;
+    saveDefaultConfig();
+    config = getConfig();
+    particleApi = new ParticleApi(this);
+    init();
+    ItemConverter converter = new ItemConverter(config, this);
+    Scroll.init();
+    getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
+    
+    // Retrieve the roll value from the config
+    int rollValue = config.getInt("rollValue", 10);  // Default is 10 if not set in config
+    
+    // Register the roll command with the configurable value
+    registerCommand(new Roll(converter, rollValue), "roll");
+    
+    createCooldowns();
+    logInfo("Hello from magic items!");
     }
-
+    
     @Override
     public void onDisable() {
         // Plugin shutdown logic
