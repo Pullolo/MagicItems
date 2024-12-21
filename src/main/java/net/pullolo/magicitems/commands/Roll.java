@@ -46,7 +46,7 @@ public class Roll extends Command implements CommandExecutor, TabCompleter {
         }
 
         // Check if the player has enough experience to perform the roll
-        if (p.getExpToLevel() < experienceCost) {
+        if (p.getTotalExperience() < experienceCost) {
             p.sendMessage(ChatColor.RED + "You do not have enough experience to perform this roll!");
             return true;
         }
