@@ -32,7 +32,7 @@ public final class MagicItems extends JavaPlugin {
         ItemConverter converter = new ItemConverter(config, this);
         Scroll.init();
         getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
-        registerCommand(new Roll(converter), "roll");
+        registerCommand(new Roll(converter, 20), "roll");
         createCooldowns();
         logInfo("Hello from magic items!");
     }
