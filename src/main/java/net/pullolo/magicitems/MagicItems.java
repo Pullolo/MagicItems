@@ -34,7 +34,7 @@ public void onEnable() {
     getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
     
     // Retrieve the roll value from the config
-    int rollValue = config.getInt("rollValue", 10);  // Default is 10 if not set in config
+    int rollValue = config.getInt("rollValue");  // Default is 10 if not set in config
     
     // Register the roll command with the configurable value
     registerCommand(new Roll(converter, rollValue), "roll");
