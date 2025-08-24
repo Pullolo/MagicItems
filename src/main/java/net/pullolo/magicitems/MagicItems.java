@@ -32,13 +32,13 @@ public void onEnable() {
     ItemConverter converter = new ItemConverter(config, this);
     Scroll.init();
     getServer().getPluginManager().registerEvents(new ItemsEventHandler(converter), this);
-    
+
     // Retrieve the roll value from the config
     int rollValue = config.getInt("rollValue");  // Default is 10 if not set in config
-    
+
     // Register the roll command with the configurable value
     registerCommand(new Roll(converter, rollValue), "roll");
-    
+
     createCooldowns();
     logInfo("Hello from magic items!");
     }
