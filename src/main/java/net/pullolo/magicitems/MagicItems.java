@@ -63,6 +63,7 @@ public void onEnable() {
         CooldownApi.createCooldown("lightning-scroll", new LightningScroll().getCooldown());
         CooldownApi.createCooldown("growth-scroll", new GrowthScroll().getCooldown());
         CooldownApi.createCooldown("shriek-scroll", new ShriekScroll().getCooldown());
+        CooldownApi.createCooldown("frenzy-scroll", new FrenzyScroll().getCooldown());
     }
 
     private void registerCommand(CommandExecutor cmd, String cmdName){
