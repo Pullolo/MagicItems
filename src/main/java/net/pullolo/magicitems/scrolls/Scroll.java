@@ -29,6 +29,8 @@ public abstract class Scroll {
                 return new GrowthScroll();
             case "shriek":
                 return new ShriekScroll();
+            case "frenzy":
+                return new FrenzyScroll();
             default:
                 return new Scroll() {
                     @Override
@@ -44,6 +46,7 @@ public abstract class Scroll {
         meleeScrolls.add("wind");
         meleeScrolls.add("lightning");
         meleeScrolls.add("growth");
+        meleeScrolls.add("frenzy");
 
         rangeScrolls.add("shriek");
     }
