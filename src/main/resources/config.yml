@@ -1,4 +1,20 @@
-rollValue: 20
+rollValue: 160 #raw exp
+
+#scrolls configuration
+fire_scroll:
+  damage: 4.0
+growth_scroll:
+  heal_amount: 5.0
+lightning_scroll:
+  distance: 4.0
+  damage: 6.0
+shriek_scroll:
+  damage_direct_hit: 18.0
+  damage_explosion: 16.0
+  distance: 20
+  speed: 1.0
+wind_scroll:
+  velocity_multiplier: 1.5
 
 convertable:
   - NETHERITE_SWORD
