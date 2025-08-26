@@ -19,6 +19,7 @@ All special items have a 7% chance to contain an ancient scroll which gives the 
   - Lightning Strike ⚡
   - Shriek Missile (Range Only) 🏹
   - Instant Heal ❤️
+  - Frenzy 💥💫
 
 > [!IMPORTANT]
 > Special items can be obtained only from random chests or mob drops

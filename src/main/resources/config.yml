@@ -2,12 +2,30 @@ rollValue: 160 #raw exp
 
 #scrolls configuration
 fire_scroll:
-  damage: 4.0
+  damage: 10.0
 growth_scroll:
   heal_amount: 5.0
+  radius: 5.0
+  regen_duration: 5
+  friendly_entities:
+    - VILLAGER
+    - IRON_GOLEM
+    - WOLF
+    - CAT
+    - HORSE
+    - LLAMA
+frenzy_scroll:
+  damage: 4.0
+  start_delay_ticks: 5
+  strike_interval_ticks: 5
+  number_of_strikes: 5
+  attack_range: 3.0
+  attack_cone: 0.6  # 1 = straight ahead, 0.5 ≈ 60°, 0 = all directions
+  speed_buff_radius: 8.0
+  speed_buff_duration: 10  # seconds
 lightning_scroll:
   distance: 4.0
-  damage: 6.0
+  damage: 15.0
 shriek_scroll:
   damage_direct_hit: 18.0
   damage_explosion: 16.0
