@@ -1,3 +1,6 @@
+> [!WARNING]
+> This project is no longer maintained.
+
 # MagicItems - Minecraft Plugin
 This plugin adds a variety of amazing items, through just the Spigot Api.
 
